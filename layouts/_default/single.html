@@ -1,8 +1,14 @@
 {{ define "main" -}}
 <div class="post">
-	{{ if isset .Params "image" }}
+	{{if isset .Params "toc"}}
+	<nav>
+	{{ .TableOfContents }}
+	</nav>
+	{{end}}
+
+	{{ if isset .Params "banner" }}
 	<div class="post-image">
-		<img src="{{ relURL .Params.image }}" {{ if isset .Params "imagetext" }}alt="{{ .Params.imagetext }}"{{ end }}>
+		<img src="{{ relURL .Params.banner }}" {{ if isset .Params "imagetext" }}alt="{{ .Params.imagetext }}"{{ end }}>
 	</div>
 	{{ end }}
 	<div class="author">
