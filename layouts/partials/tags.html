@@ -1,0 +1,8 @@
+<hr/>
+<div class="tags">
+        <p><small><kbd> 
+        {{ range $name, $taxonomy := .Site.Taxonomies.tags }}
+        <a href="{{ "/tags/"  }}{{ $name }}/">{{ $name }}</a> &nbsp;
+        {{ end }}
+    </kbd></small></p>
+</div>
