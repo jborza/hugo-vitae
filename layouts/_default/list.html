@@ -14,33 +14,48 @@
 			<div class="meta">
 				<div class="date">
 					<span class="day">{{ dateFormat "02" .Date }}</span>
-					<span class="rest">{{ if $.Site.Data.month }}{{ index $.Site.Data.month (printf "%d" .Date.Month) }} {{ .Date.Year }}{{ else }}{{ dateFormat "Jan 2006" .Date }}{{ end }}</span>
+					<span class="rest">{{ if $.Site.Data.month }}{{ index $.Site.Data.month (printf "%d" .Date.Month) }}
+						{{ .Date.Year }}{{ else }}{{ dateFormat "Jan 2006" .Date }}{{ end }}</span>
+				</div>
+				<div class="thumbnail" style="margin-left: -12px; padding-right: 4px;" >
+					{{ if .Params.image }}
+						{{ $original := print (path.Base .Params.image) }}
+						{{ $originalImg := .Resources.GetMatch $original }}
+						{{ if $originalImg }}
+							{{ $thumbnailImg := $originalImg.Fit "200x100" }}
+							{{ printf `<img src="%s" alt="%s">` 
+								$thumbnailImg.RelPermalink .Title | safeHTML }}
+						{{end}}
+					{{end}}
 				</div>
 			</div>
 			<div class="matter">
-				<h3 class="title small"><a href="{{ .RelPermalink }}">{{.Title}}{{ if .Draft }}<sup class="draft-label">DRAFT</sup>{{ end }}</a></h3>
-				<div class="author">
-				{{ if eq .Site.Params.listAuthor true }}
-					{{ if isset .Params "author" }}
-						{{ if isset .Params "authorlink" }}
-							{{ i18n "authorpretext" }} <a href="{{ relURL .Params.authorlink }}" target="_blank" rel="noopener noreferrer">{{ .Params.author }}</a>
-						{{ else }}
-							{{ i18n "authorpretext" }} {{ .Params.author }}
-						{{ end }}
-					{{ end }}
-				{{ end }}
-				</div>
+				<h3 class="title small"><a href="{{ .RelPermalink }}">{{.Title}}{{ if .Draft }}<sup
+							class="draft-label">DRAFT</sup>{{ end }}</a></h3>				
 				<span class="description">
-				{{ if isset .Params "description" }}
+					{{ if isset .Params "description" }}
 					{{ .Description }}
-				{{ else }}
-					{{ .Plain  | htmlUnescape | safeHTML | truncate 140 }}
-				{{ end }}
+					{{ else }}
+					{{ .Plain | htmlUnescape | safeHTML | truncate 200 }}
+					{{ end }}
 				</span>
+				<div class="description">
+					<small>{{ .ReadingTime }} min read -
+						<kbd>
+							{{ range .Params.tags }}
+							<a href="{{ " /tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+							{{ end }}
+						</kbd></small>
+				</div>
 			</div>
-		</div>
+			
+			
+			
 	</li>
 	{{- end -}}
 	{{- end -}}
 </ul>
+
+{{ partial "tags.html" . }}
+
 {{ end }}
