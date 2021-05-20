@@ -56,13 +56,15 @@
 		</div>
 		<div class="termsfloating_right">
 			<p>
-			{{ range $key, $value := $taxonomy }}
-			{{ range $value.Pages }}
-			{{ if eq .LinkTitle $pagename }}
-			<a href="{{ relURL $taxonomyname }}/{{ $key }}/"> {{ $key }} </a>
-			{{ end }}
-			{{ end }}
-			{{ end }}
+				<kbd>
+				{{ range $key, $value := $taxonomy }}
+				{{ range $value.Pages }}
+				{{ if eq .LinkTitle $pagename }}
+				<a href="{{ relURL $taxonomyname }}/{{ $key }}/"> {{ $key }} </a>
+				{{ end }}
+				{{ end }}
+				{{ end }}
+				</kbd>
 			</p>
 		</div>
 		<div class="clearit"></div>

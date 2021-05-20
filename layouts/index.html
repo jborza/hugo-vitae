@@ -79,7 +79,7 @@
 						<small>{{ .ReadingTime }} min read -
 							<kbd>
 								{{ range .Params.tags }}
-								<a href="{{ " /tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+								<a href="{{"/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
 								{{ end }}
 							</kbd></small>
 					</div>
