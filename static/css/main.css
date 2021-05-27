@@ -167,6 +167,7 @@ h3 {
 
 h4 {
     font-size: 1.2rem;
+    font-weight: bold;
 }
 
 h5 {
@@ -496,6 +497,14 @@ p code {
   padding: 0px 4px;
 }
 
+.thumbnail{
+  margin-left: -12px; padding-right: 4px;
+}  
+
+.thumbnail img {
+  margin-top: 0px;
+}
+
 @media screen and (max-width: 800px) {
   body {
     margin: 0 auto;
@@ -515,7 +524,8 @@ p code {
   }
 
   h4 {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
   }
 
   blockquote {
